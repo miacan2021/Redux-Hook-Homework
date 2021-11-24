@@ -15,6 +15,8 @@ const TodoList = () => {
         return todoArr
       case 'SHOW_ACTIVE':
         return todoArr.filter((todo) => !todo.isDone)
+      case 'SHOW_COMPLETED':
+        return todoArr.filter((todo) => todo.isDone)
       default:
         break
     }
