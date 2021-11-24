@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from 'uuid'
-import { NEW_TO_DO } from '../action/actions'
+import { NEW_TO_DO, DONE_TO_DO } from '../action/actions'
 
 const initState = {
     toDoList: [
@@ -14,11 +14,20 @@ const todosReducer = (state = initState, action) => {
         case NEW_TO_DO:
             action.payload.id = uuidv4()
             action.payload.isDone = false
-
             return {
                 ...state,
                 toDoList: [...state.toDoList, action.payload]
             }
+
+        case DONE_TO_DO:
+            state.toDoList.forEach(todo => {
+                if(todo.id === action.payload)
+                {todo.isDone = !todo.isDone}
+            })
+        return {
+           ...state,
+           toDoList: [...state.toDoList]
+        }
     
         default:
             return state;
